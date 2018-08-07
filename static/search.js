@@ -6,12 +6,26 @@ tabs.push('searchResults-blog');
 //---------------------------------------------//
 function show(name)
 {
-  var icount = tabs.length;
-  for (var i=0;i<icount;i++)
-  {
-    var tab = $('#'+tabs[i]);
-    console.log('tab is ', tabs[i]);
-  }
+  // var product = $('#searchResults-product').attr('id');
+  // var video = $('#searchResults-video').attr('id');
+  // var blog = $('#searchResults-blog');
+  //
+  // if()
+  // console.log('product id', product.attr('id'));
+
+  // var icount = tabs.length;
+  // for (var i=0;i<icount;i++)
+  // {
+  //   var tab = $('#'+tabs[i]).attr('id');
+  //   // var tabId = tab.attr('id');
+  //   // console.log('tab id is '+tabId);
+  //   // var tab = $('#searchResults-product').id;
+  //   if(tab = name)
+  //   {
+  //     console.log('tab is ', tab);
+  //     $('#'+tabs[i]).show();
+  //   }
+  // }
 }
 //---------------------------------------------//
 function getResults()
