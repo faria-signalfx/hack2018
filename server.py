@@ -8,7 +8,7 @@ import sys
 
 _startroute = 'static/index.html'
 _debug = True
-_port = 8080
+_port = 8000
 
 #----------------------------------------------#
 class MainHandler(tornado.web.RequestHandler):
