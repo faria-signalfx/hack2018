@@ -1,0 +1,30 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src='search.js'></script>
+  <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+
+</head>
+
+<body>
+
+  <input type='text' id='searchBox' />
+  <button type='button' onclick = 'getResults();'>Search</button>
+
+  <table>
+  <tr>
+    <td><h4><a href='#' onclick='show("product");'>Product Documentation</h4></td>
+    <td><h4><a href='#' onclick='show("video");'>Video Tutorials</a></h4></td>
+    <td><h4><a href='#' onclick='show("blog");'>Blog Posts</a></h4></td>
+  </tr>
+</table>
+  <div id='searchResults-product'></div>
+  <div id='searchResults-video'></div>
+  <div id='searchResults-blog'></div>
+  <script>
+    $(document).ready( function() {
+      // getResults();
+    });//document ready
+  </script>
+</body>
+</html>
