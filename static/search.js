@@ -94,7 +94,8 @@ function displayResultsDocumentation(data)
     var updatedDate = page['updated_at'];
     var body = page['highlight']['body']; //get only the first 50 words or so
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
-    content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
+    // content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
+    content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
 
     // console.log ('page is ', page);
@@ -115,14 +116,70 @@ function displayResultsVideo(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['body']; //get only the first 50 words or so
+    var body = page['highlight']['body']; //get only the first 50 words or so
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
-    content += "<br /><p class='resultBody'>"+body.substring(1,200)+"...</p>";
+    content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
 
     // console.log ('page is ', page);
   }
   // console.log ('pages is ', countOfPages);
 }
+//---------------------------------------------//
+function getAutocompleteResults()
+{
+  var arr = ['asdf','sdfgdfg'];
+  return arr;
+}
+//---------------------------------------------//
+function displayAutocompleteResults()
+{
+  console.log('in displayAutocompleteResults');
+  var arr = getAutocompleteResults();
+}
+//---------------------------------------------//
+function getAutocompleteResultsFromDocumentation()
+{
+  $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
+  var term = $('#searchBox').val();
+
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Uo-nNU7DVc5j98u4RAMf', {
+    'q': term
+  });
+  //----------------------//
+  request.fail (function (jqXHR, textStatus , errorThrown){
+    console.log('error in getting search results: ', textStatus, errorThrown);
+  });
+  //----------------------//
+  request.done (function(data) {
+    console.log('data is ', data);
+    return data;
+  });
+  //----------------------//
+  request.always (function() {});
+  //----------------------//
+}
+//---------------------------------------------//
+function getAutocompleteResultsFromVideo()
+{
+  $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
+  var term = $('#searchBox').val();
+
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=LuAqe4osxGMm7bq8Fvee', {
+    'q': term
+  });
+  //----------------------//
+  request.fail (function (jqXHR, textStatus , errorThrown){
+    console.log('error in getting video search results: ', textStatus, errorThrown);
+  });
+  //----------------------//
+  request.done (function(data) {
+    console.log('video data is ', data);
+  });
+  //----------------------//
+  request.always (function() {});
+  //----------------------//
+}
+//---------------------------------------------//
 //---------------------------------------------//
 //---------------------------------------------//
