@@ -92,9 +92,9 @@ function displayResultsDocumentation(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['body']; //get only the first 50 words or so
+    var body = page['highlight']['body']; //get only the first 50 words or so
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
-    content += "<br /><p class='resultBody'>"+body.substring(1,200)+"...</p>";
+    content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
 
     // console.log ('page is ', page);
