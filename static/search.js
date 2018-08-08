@@ -42,6 +42,7 @@ function getResults()
   request.done (function(data) {
     console.log('data is ', data);
     displayResultsDocumentation(data);
+    $('#searchResultsTab-product').click();
   });
   //----------------------//
   request.always (function() {});

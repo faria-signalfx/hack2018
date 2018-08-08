@@ -13,9 +13,9 @@
 
   <!-- Tab links -->
   <div class="tab">
-    <button class="tablinks" onclick="showTab(event, 'searchResults-product')">Product</button>
-    <button class="tablinks" onclick="showTab(event, 'searchResults-video')">Training Videos</button>
-    <button class="tablinks" onclick="showTab(event, 'searchResults-blog')">Blog</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Training Videos</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog</button>
   </div>
 
 
@@ -28,7 +28,8 @@
   <div id='searchResults-blog' class='tabcontent'></div>
   <script>
     $(document).ready( function() {
-      // getResults();
+      //default to open PRODUCT
+
     });//document ready
   </script>
 </body>
