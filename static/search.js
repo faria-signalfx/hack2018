@@ -4,28 +4,26 @@ tabs.push('searchResults-video');
 tabs.push('searchResults-blog');
 
 //---------------------------------------------//
-function show(name)
-{
-  // var product = $('#searchResults-product').attr('id');
-  // var video = $('#searchResults-video').attr('id');
-  // var blog = $('#searchResults-blog');
-  //
-  // if()
-  // console.log('product id', product.attr('id'));
+//credit: https://www.w3schools.com/howto/howto_js_tabs.asp
+function showTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-  // var icount = tabs.length;
-  // for (var i=0;i<icount;i++)
-  // {
-  //   var tab = $('#'+tabs[i]).attr('id');
-  //   // var tabId = tab.attr('id');
-  //   // console.log('tab id is '+tabId);
-  //   // var tab = $('#searchResults-product').id;
-  //   if(tab = name)
-  //   {
-  //     console.log('tab is ', tab);
-  //     $('#'+tabs[i]).show();
-  //   }
-  // }
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 //---------------------------------------------//
 function getResults()

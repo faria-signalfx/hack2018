@@ -11,19 +11,21 @@
   <input type='text' id='searchBox' />
   <button type='button' onclick = 'getResults();'>Search</button>
 
-  <table>
-  <tr>
-    <td><h4><a href='#' onclick='show("product");'>Product Documentation</h4></td>
-    <td><h4><a href='#' onclick='show("video");'>Video Tutorials</a></h4></td>
-    <td><h4><a href='#' onclick='show("blog");'>Blog Posts</a></h4></td>
-  </tr>
-</table>
+  <!-- Tab links -->
+  <div class="tab">
+    <button class="tablinks" onclick="showTab(event, 'searchResults-product')">Product</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-video')">Training Videos</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-blog')">Blog</button>
+  </div>
+
+
+
   <!-- <div id='searchResults-product' style='display:none;'> PRODUCT </div>
   <div id='searchResults-video' style='display:none;'> VIDEO </div>
   <div id='searchResults-blog' style='display:none;'> BLOG </div> -->
-  <div id='searchResults-product'></div>
-  <div id='searchResults-video'></div>
-  <div id='searchResults-blog'></div>
+  <div id='searchResults-product' class='tabcontent'></div>
+  <div id='searchResults-video' class='tabcontent'></div>
+  <div id='searchResults-blog' class='tabcontent'></div>
   <script>
     $(document).ready( function() {
       // getResults();
