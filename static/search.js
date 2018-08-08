@@ -29,7 +29,7 @@ function showTab(evt, cityName) {
 function getResults()
 {
   getDocumentationResults();
-  // getVideoResults();
+  getVideoResults();
 
 }
 //---------------------------------------------//
@@ -61,18 +61,18 @@ function getVideoResults()
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
   var term = $('#searchBox').val();
 
-  var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=Uo-nNU7DVc5j98u4RAMf', {
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=LuAqe4osxGMm7bq8Fvee', {
     'q': term
   });
   //----------------------//
   request.fail (function (jqXHR, textStatus , errorThrown){
-    console.log('error in getting search results: ', textStatus, errorThrown);
+    console.log('error in getting video search results: ', textStatus, errorThrown);
   });
   //----------------------//
   request.done (function(data) {
-    console.log('data is ', data);
-    displayResultsDocumentation(data);
-    $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
+    console.log('video data is ', data);
+    displayResultsVideo(data);
+    // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
   //----------------------//
   request.always (function() {});
@@ -102,5 +102,27 @@ function displayResultsDocumentation(data)
   // console.log ('pages is ', countOfPages);
 }
 //---------------------------------------------//
+function displayResultsVideo(data)
+{
+  var pages = data['records']['page'];
+  var countOfPages = Object.keys(pages).length;
+  var container = $('#searchResults-video');
+  //first clear out the container
+  container.empty();
+  for (key in pages)
+  {
+    var page = pages[key];
+    var pageUrl = page['url'];
+    var pageTitle = page['title'];
+    var updatedDate = page['updated_at'];
+    var body = page['body']; //get only the first 50 words or so
+    var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
+    content += "<br /><p class='resultBody'>"+body.substring(1,200)+"...</p>";
+    $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
+
+    // console.log ('page is ', page);
+  }
+  // console.log ('pages is ', countOfPages);
+}
 //---------------------------------------------//
 //---------------------------------------------//
