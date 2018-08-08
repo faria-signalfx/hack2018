@@ -30,13 +30,14 @@ function getResults()
 {
   getDocumentationResults();
   getVideoResults();
+  $('.tab').show();
 
 }
 //---------------------------------------------//
 function getDocumentationResults()
 {
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
-  var term = $('#searchBox').val();
+  var term = $('#autocomplete').val();
 
   var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=Uo-nNU7DVc5j98u4RAMf', {
     'q': term
@@ -59,7 +60,7 @@ function getDocumentationResults()
 function getVideoResults()
 {
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
-  var term = $('#searchBox').val();
+  var term = $('#autocomplete').val();
 
   var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=LuAqe4osxGMm7bq8Fvee', {
     'q': term
@@ -126,44 +127,100 @@ function displayResultsVideo(data)
   // console.log ('pages is ', countOfPages);
 }
 //---------------------------------------------//
-function getAutocompleteResults()
+function getAutocompleteResults(term)
 {
-  var arr = ['asdf','sdfgdfg'];
-  return arr;
+  var docsData = getAutocompleteResultsFromDocumentation(term);
+  var formattedData = docsData.then(formatAutocompleteResultsDocumentation, promiseErrorHandler);
+  // console.log('docsdata  is ', docsData);
+  // console.log('formattedData is now ', formattedData);
+  return formattedData;
+}
+//---------------------------------------------//
+function promiseErrorHandler()
+{
+  console.log('error from promise: DUH');
+}
+//---------------------------------------------//
+function formatAutocompleteResultsDocumentation(data)
+{
+  var formattedList = [];
+  var returnValue = {};
+  // console.log('data from promise is ', data);
+  var pages = data['records']['page'];
+  for (key in pages)
+  {
+    var page = pages[key];
+    var pageUrl = page['url'];
+    var pageTitle = page['title'];
+    // var pageValue = '<a href="'+pageUrl+'">'+pageTitle+'</a>';
+    var pageValue = pageTitle;
+    formattedList.push(
+      {"value":pageValue, "data": pageUrl }
+    );
+    // var body = page['highlight']['body'];
+  }
+  returnValue.suggestions=formattedList;
+  // console.log('formatted value is ', formattedList);
+  // console.log('suggestion list is ', returnValue);
+  return returnValue;
 }
 //---------------------------------------------//
 function displayAutocompleteResults()
 {
-  console.log('in displayAutocompleteResults');
-  var arr = getAutocompleteResults();
-}
-//---------------------------------------------//
-function getAutocompleteResultsFromDocumentation()
-{
-  $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
-  var term = $('#searchBox').val();
 
-  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Uo-nNU7DVc5j98u4RAMf', {
-    'q': term
+  $('#autocomplete').autocomplete({
+    lookup: function (query, done) {
+      getAutocompleteResults(query).then(function(result) {
+        // console.log('after getcompleteresults ', result);
+        done(result);
+
+      });
+    },
+    onSelect: function(suggestion) {
+      // $('#selected_option').html(suggestion.data);
+      window.location.replace(suggestion.data);
+    }
+
+
   });
-  //----------------------//
-  request.fail (function (jqXHR, textStatus , errorThrown){
-    console.log('error in getting search results: ', textStatus, errorThrown);
-  });
-  //----------------------//
-  request.done (function(data) {
-    console.log('data is ', data);
-    return data;
-  });
-  //----------------------//
-  request.always (function() {});
-  //----------------------//
+
+
 }
 //---------------------------------------------//
+//FIXME: did not test failure conditions
+function getAutocompleteResultsFromDocumentation(term)
+{
+  var returnValue = new Promise(function (resolve, reject) {
+    $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
+
+    var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Uo-nNU7DVc5j98u4RAMf', {
+      'q': term
+    });
+    //----------------------//
+    request.fail (function (jqXHR, textStatus , errorThrown){
+      console.log('error in getting autocomplete results: ', textStatus, errorThrown);
+      reject(textStatus);
+    });
+    //----------------------//
+    request.done (function(data) {
+      console.log('raw data from endpoint is ', data);
+      resolve(data);
+      // returnValue = data;
+    });
+    //----------------------//
+    request.always (function() {});
+    //----------------------//
+  });
+
+  // console.log('returnValue is ', returnValue);
+  return returnValue;
+}
+//---------------------------------------------//
+//TBD
 function getAutocompleteResultsFromVideo()
 {
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
-  var term = $('#searchBox').val();
+  var term = $('#autocomplete').val();
 
   var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=LuAqe4osxGMm7bq8Fvee', {
     'q': term

@@ -1,18 +1,23 @@
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
+
   <script src='search.js'></script>
   <link type='text/css' rel='stylesheet' href='search.css' media='all' />
 
 </head>
 
 <body>
-
-  <input type='text' id='searchBox' />
-  <button type='button' onclick = 'getResults();'>Search</button>
+  <input type='text' name='searchBox' id='autocomplete' size='100'/>
+  <!-- <button type='button' onclick = 'getResults();'>Search</button> -->
+  <!-- <div>
+ Selected Option : <span id="selected_option"></span>
+</div> -->
 
   <!-- Tab links -->
-  <div class="tab">
+  <div class="tab" style='display:none;'>
     <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Training Videos</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog</button>
@@ -28,7 +33,14 @@
   <div id='searchResults-blog' class='tabcontent'></div>
   <script>
     $(document).ready( function() {
-      //default to open PRODUCT
+      displayAutocompleteResults();
+      //catch the enter key
+      $('#autocomplete').keypress(function(event){
+          var keycode = (event.keyCode ? event.keyCode : event.which);
+          if(keycode == '13'){
+              getResults();
+          }
+      });
 
     });//document ready
   </script>
