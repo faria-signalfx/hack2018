@@ -1,39 +1,7 @@
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src='search.js'></script>
-  <script type="text/javascript" src="swiftype/swiftype-autocomplete-jquery/jquery.swiftype.autocomplete.js"></script>
-  <!--use either the css file to style OR use the script tag and the swiftype UI to manage style. Don't use both as they conflict -->
-  <!-- <link type='text/css' rel='stylesheet' href='swiftype/swiftype-autocomplete-jquery/autocomplete.css' media='all' /> -->
-
-  <script type='text/javascript'>
-  $(function() {
-    $('#st-search-input').swiftype({
-      // searchFields: {'page': ['title', 'content']},
-      engineKey: 'Uo-nNU7DVc5j98u4RAMf'
-    });
-  });
+  <script>
+    window.location.replace('search.html');
   </script>
 </head>
-  <body>
-    <script type="text/javascript">
-      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-      _st('install','vbztjbXemmbs6yJGxGw4','2.0.0');
-    </script>
-
-
-    <input type="text" id='st-search-input' class='st-default-search-input'>
-    <!-- <br /> -->
-    <!-- <button type='button' onclick='getResults();'>Raw results</button> -->
-
-  <script>
-    $(document).ready( function() {
-      // getResults();
-    });//document ready
-  </script>
-  </body>
 </html>
