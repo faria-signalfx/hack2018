@@ -42,7 +42,7 @@ function getResults()
   request.done (function(data) {
     console.log('data is ', data);
     displayResultsDocumentation(data);
-    $('#searchResultsTab-product').click();
+    $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
   //----------------------//
   request.always (function() {});
@@ -55,6 +55,8 @@ function displayResultsDocumentation(data)
   var pages = data['records']['page'];
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-product');
+  //first clear out the container
+  container.empty();
   for (key in pages)
   {
     var page = pages[key];
