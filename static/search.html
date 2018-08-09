@@ -11,6 +11,7 @@
 
 <body>
   <input type='text' name='searchBox' id='autocomplete' size='100'/>
+
   <!-- <button type='button' onclick = 'getResults();'>Search</button> -->
   <!-- <div>
  Selected Option : <span id="selected_option"></span>
@@ -22,17 +23,22 @@
     <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product Documents</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Papers / Webinars / Case Studies</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog</button>
+
   </div>
+
 
 
 
   <!-- <div id='searchResults-product' style='display:none;'> PRODUCT </div>
   <div id='searchResults-video' style='display:none;'> VIDEO </div>
   <div id='searchResults-blog' style='display:none;'> BLOG </div> -->
+
   <div id='searchResults-all' class='tabcontent'></div>
   <div id='searchResults-product' class='tabcontent'></div>
   <div id='searchResults-video' class='tabcontent'></div>
   <div id='searchResults-blog' class='tabcontent'></div>
+
+
   <script>
     $(document).ready( function() {
       displayAutocompleteResults();
