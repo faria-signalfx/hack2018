@@ -62,7 +62,7 @@ function getVideoResults()
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
   var term = $('#autocomplete').val();
 
-  var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=LuAqe4osxGMm7bq8Fvee', {
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=Q9h_KJ8_Yoq1exwq71Pz', {
     'q': term
   });
   //----------------------//
@@ -155,7 +155,7 @@ function formatAutocompleteResultsDocumentation(data)
     // var pageValue = '<a href="'+pageUrl+'">'+pageTitle+'</a>';
     var pageValue = pageTitle;
     formattedList.push(
-      {"value":pageValue, "data": pageUrl }
+      {"value":pageValue, "data": {pageUrl, "category": "Product Documents"} }
     );
     // var body = page['highlight']['body'];
   }
@@ -176,6 +176,7 @@ function displayAutocompleteResults()
 
       });
     },
+    groupBy: 'category',
     onSelect: function(suggestion) {
       // $('#selected_option').html(suggestion.data);
       window.location.replace(suggestion.data);
