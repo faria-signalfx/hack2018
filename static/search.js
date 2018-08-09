@@ -3,6 +3,9 @@ tabs.push('searchResults-product');
 tabs.push('searchResults-video');
 tabs.push('searchResults-blog');
 
+var resultsForAllTab = new Array();
+var MAX_RESULTS = 5;
+
 //---------------------------------------------//
 //credit: https://www.w3schools.com/howto/howto_js_tabs.asp
 function showTab(evt, cityName) {
@@ -33,6 +36,7 @@ function getResults()
   getBlogResults();
   $('.tab').show();
 
+
 }
 //---------------------------------------------//
 function getDocumentationResults()
@@ -51,7 +55,9 @@ function getDocumentationResults()
   request.done (function(data) {
     console.log('data is ', data);
     displayResultsDocumentation(data);
-    $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
+    displayAllTab();
+    $('#searchResultsTab-all').click();
+    // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
   //----------------------//
   request.always (function() {});
@@ -74,7 +80,6 @@ function getVideoResults()
   request.done (function(data) {
     console.log('video data is ', data);
     displayResultsVideo(data);
-    // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
   //----------------------//
   request.always (function() {});
@@ -97,7 +102,6 @@ function getBlogResults()
   request.done (function(data) {
     console.log('video data is ', data);
     displayResultsBlog(data);
-    // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
   //----------------------//
   request.always (function() {});
@@ -107,6 +111,7 @@ function getBlogResults()
 //---------------------------------------------//
 function displayResultsDocumentation(data)
 {
+  var counter = 0;
   var pages = data['records']['page'];
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-product');
@@ -119,18 +124,24 @@ function displayResultsDocumentation(data)
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
     var body = page['highlight']['body']; //get only the first 50 words or so
+    //replace string
+    // body = body.replace(/<em>/g,'ASDF');
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     // content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
-
-    // console.log ('page is ', page);
+    if(counter < MAX_RESULTS)
+    {
+      page.category = 'searchResults-all-product';
+      resultsForAllTab.push(page);
+      counter++;
+    }
   }
-  // console.log ('pages is ', countOfPages);
 }
 //---------------------------------------------//
 function displayResultsVideo(data)
 {
+  var counter = 0;
   var pages = data['records']['page'];
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-video');
@@ -146,14 +157,18 @@ function displayResultsVideo(data)
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
-
-    // console.log ('page is ', page);
+    if(counter < MAX_RESULTS)
+    {
+      page.category = 'searchResults-all-video';
+      resultsForAllTab.push(page);
+      counter++;
+    }
   }
-  // console.log ('pages is ', countOfPages);
 }
 //---------------------------------------------//
 function displayResultsBlog(data)
 {
+  var counter = 0;
   var pages = data['records']['page'];
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-blog');
@@ -169,10 +184,52 @@ function displayResultsBlog(data)
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
-
-    // console.log ('page is ', page);
+    if(counter < MAX_RESULTS)
+    {
+      page.category = 'searchResults-all-blog';
+      resultsForAllTab.push(page);
+      counter++;
+    }
   }
-  // console.log ('pages is ', countOfPages);
+}
+//---------------------------------------------//
+function displayAllTab()
+{
+  var containerProduct = $('#searchResults-all-product');
+  var containerVideo = $('#searchResults-all-video');
+  var containerBlog = $('#searchResults-all-blog');
+
+  containerProduct.empty();
+  containerVideo.empty();
+  containerBlog.empty();
+
+  var icount = resultsForAllTab.length;
+  for (var i=0;i<icount;i++)
+  {
+    // console.log('PAGE now is ', resultsForAllTab[i]);
+    var pageTitle = resultsForAllTab[i]['title'];
+    var pageUrl = resultsForAllTab[i]['url'];
+    var body = resultsForAllTab[i]['highlight']['body'];
+    var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
+    content += "<br /><p class='resultBody'>"+body+"...</p>";
+    var contentType = resultsForAllTab[i]['category'].toString();
+    // console.log('CONTENT TYPS IS ', contentType);
+    if(contentType == 'searchResults-all-product')
+    {
+      // console.log('MATCHED');
+      $('<p>', {html: content, class: 'resultRow'}).appendTo(containerProduct);
+    }
+    else if (contentType == 'searchResults-all-video')
+    {
+      $('<p>', {html: content, class: 'resultRow'}).appendTo(containerVideo);
+    }
+    else if (contentType == 'searchResults-all-blog')
+    {
+      $('<p>', {html: content, class: 'resultRow'}).appendTo(containerBlog);      
+    }
+
+    // console.log(resultsForAllTab[i]);
+  }
 }
 //---------------------------------------------//
 function getAutocompleteResults(term)

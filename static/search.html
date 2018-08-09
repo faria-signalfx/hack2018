@@ -22,7 +22,7 @@
     <button class="tablinks" onclick="showTab(event, 'searchResults-all')" id='searchResultsTab-all'>All</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product Documents</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Papers / Webinars / Case Studies</button>
-    <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog Posts</button>
 
   </div>
 
@@ -33,7 +33,18 @@
   <div id='searchResults-video' style='display:none;'> VIDEO </div>
   <div id='searchResults-blog' style='display:none;'> BLOG </div> -->
 
-  <div id='searchResults-all' class='tabcontent'></div>
+  <div id='searchResults-all' class='tabcontent'>
+    <h4>Product Documents <a href='#' onclick="showTab(event, 'searchResults-product')">See more</a></h4>
+    <hr>
+    <div id='searchResults-all-product'></div>
+    <h4>Papers / Webinars / Case Studies <a href='#' onclick="showTab(event, 'searchResults-video')">See more</a></h4>
+    <hr>
+    <div id='searchResults-all-video'></div>
+    <h4>Blog Posts <a href='#' onclick="showTab(event, 'searchResults-blog')">See more</a></h4>
+    <hr>
+    <div id='searchResults-all-blog'></div>
+  </div>
+
   <div id='searchResults-product' class='tabcontent'></div>
   <div id='searchResults-video' class='tabcontent'></div>
   <div id='searchResults-blog' class='tabcontent'></div>
