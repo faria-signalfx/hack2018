@@ -127,8 +127,9 @@ function displayResultsDocumentation(data)
     //replace string
     body = body.replace('<em>','<span class="highlight">');
     body = body.replace('</em>','</span>');
+    body = body.replace(/[^ -~]+/g, "");
     page['highlight']['body'] = body;
-    console.log('BODY is ', body);
+    // console.log('BODY is ', body);
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     // content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
@@ -159,6 +160,7 @@ function displayResultsVideo(data)
     var body = page['highlight']['body']; //get only the first 50 words or so
     body = body.replace('<em>','<span class="highlight">');
     body = body.replace('</em>','</span>');
+
     page['highlight']['body'] = body;
 
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
