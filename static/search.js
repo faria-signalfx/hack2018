@@ -30,6 +30,7 @@ function getResults()
 {
   getDocumentationResults();
   getVideoResults();
+  getBlogResults();
   $('.tab').show();
 
 }
@@ -80,6 +81,30 @@ function getVideoResults()
   //----------------------//
 }
 //---------------------------------------------//
+function getBlogResults()
+{
+  $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
+  var term = $('#autocomplete').val();
+
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/search?engine_key=F6z6yA81LmhVykmYGYAa', {
+    'q': term
+  });
+  //----------------------//
+  request.fail (function (jqXHR, textStatus , errorThrown){
+    console.log('error in getting blog search results: ', textStatus, errorThrown);
+  });
+  //----------------------//
+  request.done (function(data) {
+    console.log('video data is ', data);
+    displayResultsBlog(data);
+    // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
+  });
+  //----------------------//
+  request.always (function() {});
+  //----------------------//
+}
+
+//---------------------------------------------//
 function displayResultsDocumentation(data)
 {
   var pages = data['records']['page'];
@@ -109,6 +134,29 @@ function displayResultsVideo(data)
   var pages = data['records']['page'];
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-video');
+  //first clear out the container
+  container.empty();
+  for (key in pages)
+  {
+    var page = pages[key];
+    var pageUrl = page['url'];
+    var pageTitle = page['title'];
+    var updatedDate = page['updated_at'];
+    var body = page['highlight']['body']; //get only the first 50 words or so
+    var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
+    content += "<br /><p class='resultBody'>"+body+"...</p>";
+    $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
+
+    // console.log ('page is ', page);
+  }
+  // console.log ('pages is ', countOfPages);
+}
+//---------------------------------------------//
+function displayResultsBlog(data)
+{
+  var pages = data['records']['page'];
+  var countOfPages = Object.keys(pages).length;
+  var container = $('#searchResults-blog');
   //first clear out the container
   container.empty();
   for (key in pages)
