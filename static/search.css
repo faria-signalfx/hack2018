@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 * {
-	font-family: "Open Sans", sans-serif;
+	font-family: "Open Sans", sans-serif !important;
 }
 >>>>>>> Stashed changes
 .resultTitle
@@ -53,20 +53,47 @@
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+    border: none;
 }
 /*--------------------------- TABS --------------------*/
 /*----------------------AUTOCOMPLETE-------------------*/
 
-.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
-.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-suggestions {
+border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-bottom: 1px solid #ddd;
+background: #FFF;
+overflow: auto;
+padding: 30px 20px 20px;
+font-family: "Open Sans", sans-serif;
+font-size: 12px;
+line-height: 20px;
+border-radius: 0 0 10px 10px;
+
+z-index: 1 !important;
+left: 50% !important;
+margin-top: -20px !important;
+margin-left: -125px !important;
+width: 208px !important;
+}
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 2px 5px; }
-.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+.autocomplete-group strong {
+display: block;
+border-bottom: 1px solid #ddd;
+margin-bottom: 10px;
+}
 /*----------------------AUTOCOMPLETE-------------------*/
 =======
+
+.tab{
+width:460px;
+position:relative;
+left:50%;
+margin-left:-230px;
+}
 
 h4 {
 	font-weight:400;
@@ -105,8 +132,8 @@ margin-left: -500px;
 border-radius:30px;
 }
 
-#searchBox {
-padding: 8px 65px 12px 12px;
+#autocomplete {
+padding: 12px;
 border-radius: 50px;
 border: 1px solid #ddd;
 font-size: 14px;
@@ -116,6 +143,7 @@ left: 50%;
 margin-left: -125px;
 margin-top: 50px;
 width: 250px;
+z-index: 2;
 }
 
 table{
@@ -139,21 +167,7 @@ td:last-child{
 	border:none;
 }
 
-button {
-font-size: 12px;
-text-transform: uppercase;
-background: #59a200;
-border: none;
-color: #fff;
-padding: 8px 20px;
-border-radius: 0 50px 50px 0;
-position: relative;
-left: 50%;
-top:1px;
-margin-left: -89px;
-display:inline-block;
-height:41px;
-}
+
 
 button:hover{
 	background: #63b500;
@@ -163,10 +177,13 @@ button:active{
 	background: #2b4e00;
 }
 
-#searchResults-product, #searchResults-video, #searchResults-blog{
+#searchResults-all, #searchResults-product, #searchResults-video, #searchResults-blog{
 	padding: 10px 200px;
 color: #555;
 border-top:1px solid #eee;
+font-family:"Open Sans", sans-serif;
+font-size:14px;
+margin-top: 50px;
 }
 
 .resultBody{
