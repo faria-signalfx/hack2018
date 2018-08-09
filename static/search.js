@@ -179,7 +179,8 @@ function displayAutocompleteResults()
     groupBy: 'category',
     onSelect: function(suggestion) {
       // $('#selected_option').html(suggestion.data);
-      window.location.replace(suggestion.data);
+      console.log('selected data is ', suggestion.data);
+      window.location.replace(suggestion.data['pageUrl']);
     }
 
 
@@ -223,7 +224,7 @@ function getAutocompleteResultsFromVideo()
   $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
   var term = $('#autocomplete').val();
 
-  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=LuAqe4osxGMm7bq8Fvee', {
+  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Q9h_KJ8_Yoq1exwq71Pz', {
     'q': term
   });
   //----------------------//
