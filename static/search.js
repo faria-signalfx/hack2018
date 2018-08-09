@@ -117,6 +117,7 @@ function displayResultsDocumentation(data)
 {
   var counter = 0;
   var pages = data['records']['page'];
+  // console.log('pages are ', pages);
   var countOfPages = Object.keys(pages).length;
   var container = $('#searchResults-product');
   //first clear out the container
@@ -127,8 +128,14 @@ function displayResultsDocumentation(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['highlight']['body'].toString(); //get only the first 50 words or so
+    var body = page['highlight']['body'];
+    // console.log('BODY is ', body);
+    if (!body){
+      body = page['body'].substring(0,200)+'...';
+    }
+    body = body.toString(); //get only the first 50 words or so
     //replace string
+    // console.log('BODY is before replacing ', body);
     body = body.replace('<em>','<span class="highlight">');
     body = body.replace('</em>','</span>');
     body = body.replace(/[^ -~]+/g, "");
@@ -161,7 +168,11 @@ function displayResultsVideo(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['highlight']['body']; //get only the first 50 words or so
+    var body = page['highlight']['body'];
+    if (!body){
+      body = page['body'].substring(0,200)+'...';
+    }
+    body = body.toString();//get only the first 50 words or so
     body = body.replace('<em>','<span class="highlight">');
     body = body.replace('</em>','</span>');
 
@@ -193,7 +204,11 @@ function displayResultsBlog(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['highlight']['body']; //get only the first 50 words or so
+    var body = page['highlight']['body'];
+    if (!body){
+      body = page['body'].substring(0,200)+'...';
+    }
+    body = body.toString();//get only the first 50 words or so
     body = body.replace('<em>','<span class="highlight">');
     body = body.replace('</em>','</span>');
     page['highlight']['body'] = body;
@@ -227,6 +242,11 @@ function displayAllTab()
     var pageTitle = resultsForAllTab[i]['title'];
     var pageUrl = resultsForAllTab[i]['url'];
     var body = resultsForAllTab[i]['highlight']['body'];
+    if (body && body.length<=0){
+      body = page['body'];
+    }
+    body = body.toString();
+
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     var contentType = resultsForAllTab[i]['category'].toString();
