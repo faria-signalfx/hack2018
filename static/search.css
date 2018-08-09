@@ -30,23 +30,27 @@
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
+background-color: inherit;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 0px 10px;
+transition: 0.3s;
+border-radius: 50px;
+height: 24px;
+margin-top: 10px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #fff;
+    border:1px solid #ddd;
 }
 
 /* Style the tab content */
@@ -88,8 +92,8 @@ margin-bottom: 10px;
 /*----------------------AUTOCOMPLETE-------------------*/
 =======
 
-.tab{
-width:460px;
+.tab {
+width:460px !important;
 position:relative;
 left:50%;
 margin-left:-230px;
