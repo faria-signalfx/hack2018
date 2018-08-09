@@ -31,6 +31,7 @@ function showTab(evt, cityName) {
 //---------------------------------------------//
 function getResults()
 {
+  console.log('getting results for ', $('#autocomplete').val());
   getDocumentationResults();
   getVideoResults();
   getBlogResults();
@@ -53,7 +54,7 @@ function getDocumentationResults()
   });
   //----------------------//
   request.done (function(data) {
-    console.log('data is ', data);
+    // console.log('data is ', data);
     displayResultsDocumentation(data);
     displayAllTab();
     $('#searchResultsTab-all').click();
@@ -78,7 +79,7 @@ function getVideoResults()
   });
   //----------------------//
   request.done (function(data) {
-    console.log('video data is ', data);
+    // console.log('video data is ', data);
     displayResultsVideo(data);
   });
   //----------------------//
@@ -100,7 +101,7 @@ function getBlogResults()
   });
   //----------------------//
   request.done (function(data) {
-    console.log('video data is ', data);
+    // console.log('video data is ', data);
     displayResultsBlog(data);
   });
   //----------------------//
@@ -380,7 +381,7 @@ function displayAutocompleteResults()
     groupBy: 'category',
     onSelect: function(suggestion) {
       // $('#selected_option').html(suggestion.data);
-      console.log('selected data is ', suggestion.data);
+      // console.log('selected data is ', suggestion.data);
       window.location.replace(suggestion.data['pageUrl']);
     }
 
@@ -406,7 +407,7 @@ function getAutocompleteResultsFromDocumentation(term)
     });
     //----------------------//
     request.done (function(data) {
-      console.log('raw data from endpoint is ', data);
+      // console.log('raw data from endpoint is ', data);
       resolve(data);
       // returnValue = data;
     });
@@ -436,7 +437,7 @@ function getAutocompleteResultsFromVideo(term)
     });
     //----------------------//
     request.done (function(data) {
-      console.log('raw data from endpoint is ', data);
+      // console.log('raw data from endpoint is ', data);
       resolve(data);
       // returnValue = data;
     });
