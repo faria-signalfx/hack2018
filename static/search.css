@@ -1,31 +1,16 @@
-<<<<<<< Updated upstream
 /*----------------------SEARCH RESULTS-----------------*/
-=======
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 * {
 	font-family: "Open Sans", sans-serif !important;
 }
->>>>>>> Stashed changes
-.resultTitle
-{
-  text-decoration: none;
-}
-.resultBody
-{
 
-}
-.resultRow
-{
-
-}
-<<<<<<< Updated upstream
 /*----------------------SEARCH RESULTS-----------------*/
 /*--------------------------- TABS --------------------*/
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    /* border: 1px solid #ccc; */
+    /* background-color: #f1f1f1; */
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -91,7 +76,7 @@ border-bottom: 1px solid #ddd;
 margin-bottom: 10px;
 }
 /*----------------------AUTOCOMPLETE-------------------*/
-=======
+
 
 .tab {
 width:460px !important;
@@ -194,4 +179,7 @@ margin-top: 50px;
 .resultBody{
 	font-size:14px;
 }
->>>>>>> Stashed changes
+.highlight
+{
+  background-color: yellow;
+}

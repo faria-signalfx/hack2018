@@ -123,9 +123,12 @@ function displayResultsDocumentation(data)
     var pageUrl = page['url'];
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
-    var body = page['highlight']['body']; //get only the first 50 words or so
+    var body = page['highlight']['body'].toString(); //get only the first 50 words or so
     //replace string
-    // body = body.replace(/<em>/g,'ASDF');
+    body = body.replace('<em>','<span class="highlight">');
+    body = body.replace('</em>','</span>');
+    page['highlight']['body'] = body;
+    console.log('BODY is ', body);
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     // content += "<br /><p class='resultBody'>"+body.substring(0,200)+"...</p>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
@@ -154,6 +157,10 @@ function displayResultsVideo(data)
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
     var body = page['highlight']['body']; //get only the first 50 words or so
+    body = body.replace('<em>','<span class="highlight">');
+    body = body.replace('</em>','</span>');
+    page['highlight']['body'] = body;
+
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
@@ -181,6 +188,10 @@ function displayResultsBlog(data)
     var pageTitle = page['title'];
     var updatedDate = page['updated_at'];
     var body = page['highlight']['body']; //get only the first 50 words or so
+    body = body.replace('<em>','<span class="highlight">');
+    body = body.replace('</em>','</span>');
+    page['highlight']['body'] = body;
+
     var content = "<a class='resultTitle' href='"+pageUrl+"'>"+pageTitle+"</a>";
     content += "<br /><p class='resultBody'>"+body+"...</p>";
     $('<p>', {html: content, class: 'resultRow'}).appendTo(container);
@@ -225,7 +236,7 @@ function displayAllTab()
     }
     else if (contentType == 'searchResults-all-blog')
     {
-      $('<p>', {html: content, class: 'resultRow'}).appendTo(containerBlog);      
+      $('<p>', {html: content, class: 'resultRow'}).appendTo(containerBlog);
     }
 
     // console.log(resultsForAllTab[i]);
