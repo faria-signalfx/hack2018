@@ -168,12 +168,12 @@ button:active{
 }
 
 #searchResults-all, #searchResults-product, #searchResults-video, #searchResults-blog{
-	padding: 10px 200px;
+padding: 40px 200px;
 color: #555;
-border-top:1px solid #eee;
-font-family:"Open Sans", sans-serif;
-font-size:14px;
-margin-top: 50px;
+border-top: 1px solid #eee;
+font-family: "Open Sans", sans-serif;
+font-size: 14px;
+margin-top: 20px;
 }
 
 .resultBody{
@@ -182,4 +182,18 @@ margin-top: 50px;
 .highlight
 {
   background-color: yellow;
+}
+
+hr{
+display:none;
+}
+
+#searchResults-all h4, #searchResults-product h4, #searchResults-video h4, #searchResults-blog h4 {
+background: #e9f4ef;
+padding: 10px 20px;
+border-radius: 50px;
+}
+
+#searchResults-all h4 a, #searchResults-product h4 a, #searchResults-video h4 a, #searchResults-blog h4 a {
+	float:right;
 }
