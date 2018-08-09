@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <input type='text' name='searchBox' placeholder="Search" id='autocomplete' size='100'/>
+  <input type='text' name='searchBox' placeholder="Type query, hit enter, rejoice!" id='autocomplete' size='100'/>
 
   <!-- <button type='button' onclick = 'getResults();'>Search</button> -->
   <!-- <div>
@@ -20,7 +20,7 @@
   <!-- Tab links -->
   <div class="tab" style='display:none;width:460px;position:relative;left:50%;margin-left:-230px;'>
     <button class="tablinks" onclick="showTab(event, 'searchResults-all')" id='searchResultsTab-all'>All</button>
-    <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product Documents</button>
+    <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product Docs</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Papers / Webinars / Case Studies</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog Posts</button>
 
@@ -34,7 +34,7 @@
   <div id='searchResults-blog' style='display:none;'> BLOG </div> -->
 
   <div id='searchResults-all' class='tabcontent'>
-    <h4>Product Documents <a href='#' onclick="showTab(event, 'searchResults-product')">See more</a></h4>
+    <h4>Product Docs <a href='#' onclick="showTab(event, 'searchResults-product')">See more</a></h4>
     <hr>
     <div id='searchResults-all-product'></div>
     <h4>Papers / Webinars / Case Studies <a href='#' onclick="showTab(event, 'searchResults-video')">See more</a></h4>
@@ -57,7 +57,7 @@
       $('#autocomplete').keypress(function(event){
           var keycode = (event.keyCode ? event.keyCode : event.which);
           if(keycode == '13'){
-            console.log('ENTER detected');
+            // console.log('ENTER detected');
               getResults();
           }
       });
