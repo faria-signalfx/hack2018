@@ -3,7 +3,7 @@ tabs.push('searchResults-product');
 tabs.push('searchResults-video');
 tabs.push('searchResults-blog');
 
-var resultsForAllTab = new Array();
+var resultsForAllTab = new Array();//FIXME: don't use global array, else need to clear it out. Find a better solution
 var MAX_RESULTS = 5;
 
 //---------------------------------------------//
@@ -32,6 +32,9 @@ function showTab(evt, cityName) {
 function getResults()
 {
   console.log('getting results for ', $('#autocomplete').val());
+  //empty the global resultsForAllTab
+  resultsForAllTab = new Array();
+
   getDocumentationResults();
   getVideoResults();
   getBlogResults();
