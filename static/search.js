@@ -177,8 +177,15 @@ function displayResultsBlog(data)
 //---------------------------------------------//
 function getAutocompleteResults(term)
 {
+  var formattedData = [];
   var docsData = getAutocompleteResultsFromDocumentation(term);
-  var formattedData = docsData.then(formatAutocompleteResultsDocumentation, promiseErrorHandler);
+  var formattedDataDocs = docsData.then(formatAutocompleteResultsDocumentation, promiseErrorHandler);
+
+  var videoData = getAutocompleteResultsFromVideo(term);
+  var formattedDataVideo = videoData.then(formatAutocompleteResultsVideo, promiseErrorHandler);
+
+  formattedData.push(formattedDataDocs);
+  formattedData.push(formattedDataVideo);
   // console.log('docsdata  is ', docsData);
   // console.log('formattedData is now ', formattedData);
   return formattedData;
@@ -191,6 +198,26 @@ function promiseErrorHandler()
 //---------------------------------------------//
 function formatAutocompleteResultsDocumentation(data)
 {
+  // var formattedList = [];
+  // var returnValue = {};
+
+
+  // var pages = [];
+  // pages.push(data['records']['page'][0]);
+  // pages.push(data['records']['page'][1]);
+  //
+  // var icount = pages.length;
+  // for (var i=0;i<icount; i++)
+  // {
+  //   var page = pages[i];
+  //   var pageUrl = page['url'];
+  //   var pageTitle = page['title'];
+  //   var pageValue = pageTitle;
+  //   formattedList.push (
+  //     {"value": pageValue, "data": {pageUrl, "category": "Product Documents"} }
+  //   );
+  // }
+
   var formattedList = [];
   var returnValue = {};
   // console.log('data from promise is ', data);
@@ -213,16 +240,72 @@ function formatAutocompleteResultsDocumentation(data)
   return returnValue;
 }
 //---------------------------------------------//
+function formatAutocompleteResultsVideo(data)
+{
+  var formattedList = [];
+  var returnValue = {};
+  // console.log('data from promise is ', data);
+  var pages = data['records']['page'];
+  for (key in pages)
+  {
+    var page = pages[key];
+    var pageUrl = page['url'];
+    var pageTitle = page['title'];
+    // var pageValue = '<a href="'+pageUrl+'">'+pageTitle+'</a>';
+    var pageValue = pageTitle;
+    formattedList.push(
+      {"value":pageValue, "data": {pageUrl, "category": "Papers / Webinars / Case Studies"} }
+    );
+    // var body = page['highlight']['body'];
+  }
+  returnValue.suggestions=formattedList;
+  // console.log('formatted value is ', formattedList);
+  // console.log('suggestion list is ', returnValue);
+  return returnValue;
+  //-------------------------------------------//
+  // var formattedList = [];
+  // var returnValue = {};
+  // var pages = [];
+  //
+  // pages.push(data['records']['page'][0]);
+  // pages.push(data['records']['page'][1]);
+  //
+  // var icount = pages.length;
+  // for (var i=0;i<icount; i++)
+  // {
+  //   var page = pages[i];
+  //   var pageUrl = page['url'];
+  //   var pageTitle = page['title'];
+  //   var pageValue = pageTitle;
+  //   formattedList.push (
+  //     {"value": pageValue, "data": {pageUrl, "category": "Papers / Webinars / Case Studies"} }
+  //   );
+  // }
+  // returnValue.suggestions=formattedList;
+  //
+  // return returnValue;
+}
+
+//---------------------------------------------//
 function displayAutocompleteResults()
 {
 
   $('#autocomplete').autocomplete({
     lookup: function (query, done) {
-      getAutocompleteResults(query).then(function(result) {
-        // console.log('after getcompleteresults ', result);
-        done(result);
 
-      });
+      results = getAutocompleteResults(query);
+      /*
+      for (var i=0;i<results.length;i++)
+      {
+          results[i].then(function(result) {
+            // console.log('after getcompleteresults ', result);
+            done(result);
+
+          });
+      }
+      */
+      results[0].then(function(result) { done(result); });
+      results[1].then(function(result) { done(result); });
     },
     groupBy: 'category',
     onSelect: function(suggestion) {
@@ -267,24 +350,33 @@ function getAutocompleteResultsFromDocumentation(term)
 }
 //---------------------------------------------//
 //TBD
-function getAutocompleteResultsFromVideo()
+function getAutocompleteResultsFromVideo(term)
 {
-  $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
-  var term = $('#autocomplete').val();
 
-  var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Q9h_KJ8_Yoq1exwq71Pz', {
-    'q': term
+  var returnValue = new Promise(function (resolve, reject) {
+    $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
+
+    var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Q9h_KJ8_Yoq1exwq71Pz', {
+      'q': term
+    });
+    //----------------------//
+    request.fail (function (jqXHR, textStatus , errorThrown){
+      console.log('error in getting autocomplete results: ', textStatus, errorThrown);
+      reject(textStatus);
+    });
+    //----------------------//
+    request.done (function(data) {
+      console.log('raw data from endpoint is ', data);
+      resolve(data);
+      // returnValue = data;
+    });
+    //----------------------//
+    request.always (function() {});
+    //----------------------//
   });
-  //----------------------//
-  request.fail (function (jqXHR, textStatus , errorThrown){
-    console.log('error in getting video search results: ', textStatus, errorThrown);
-  });
-  //----------------------//
-  request.done (function(data) {
-    console.log('video data is ', data);
-  });
-  //----------------------//
-  request.always (function() {});
-  //----------------------//
+
+  // console.log('returnValue is ', returnValue);
+  return returnValue;
+
 }
 //---------------------------------------------//
