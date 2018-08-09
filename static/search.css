@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 /*----------------------SEARCH RESULTS-----------------*/
+=======
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+* {
+	font-family: "Open Sans", sans-serif;
+}
+>>>>>>> Stashed changes
 .resultTitle
 {
   text-decoration: none;
@@ -11,6 +19,7 @@
 {
 
 }
+<<<<<<< Updated upstream
 /*----------------------SEARCH RESULTS-----------------*/
 /*--------------------------- TABS --------------------*/
 .tab {
@@ -57,3 +66,110 @@
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 /*----------------------AUTOCOMPLETE-------------------*/
+=======
+
+h4 {
+	font-weight:400;
+font-size:14px;
+margin:0;
+}
+
+a {
+	text-decoration: none;
+color: #1764a7;
+}
+
+a:hover{
+	color: #208deb;
+}
+
+a:active{
+	color:#000;
+}
+
+a:visited{
+	none;
+}
+
+html{
+	background: #999;
+}
+
+body{
+	background: #fff;
+display: block;
+width: 1000px;
+position: relative;
+left: 50%;
+margin-left: -500px;
+border-radius:30px;
+}
+
+#searchBox {
+padding: 8px 65px 12px 12px;
+border-radius: 50px;
+border: 1px solid #ddd;
+font-size: 14px;
+height: 41px;
+position: relative;
+left: 50%;
+margin-left: -125px;
+margin-top: 50px;
+width: 250px;
+}
+
+table{
+position: relative;
+left: 50%;
+margin-left: -230px;
+margin-top: 20px;
+margin-bottom: 20px;
+display: block;
+width: 460px;
+}
+
+td{
+	display: inline-block;
+position: relative;
+padding: 0 20px;
+border-right: 1px solid #ddd;
+}
+
+td:last-child{
+	border:none;
+}
+
+button {
+font-size: 12px;
+text-transform: uppercase;
+background: #59a200;
+border: none;
+color: #fff;
+padding: 8px 20px;
+border-radius: 0 50px 50px 0;
+position: relative;
+left: 50%;
+top:1px;
+margin-left: -89px;
+display:inline-block;
+height:41px;
+}
+
+button:hover{
+	background: #63b500;
+}
+
+button:active{
+	background: #2b4e00;
+}
+
+#searchResults-product, #searchResults-video, #searchResults-blog{
+	padding: 10px 200px;
+color: #555;
+border-top:1px solid #eee;
+}
+
+.resultBody{
+	font-size:14px;
+}
+>>>>>>> Stashed changes
