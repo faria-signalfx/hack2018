@@ -57,7 +57,7 @@ function getDocumentationResults()
   });
   //----------------------//
   request.done (function(data) {
-    // console.log('data is ', data);
+    console.log('data is ', data);
     displayResultsDocumentation(data);
     displayAllTab();
     $('#searchResultsTab-all').click();
@@ -324,7 +324,7 @@ function formatAutocompleteResultsDocumentation(data)
     // var pageValue = '<a href="'+pageUrl+'">'+pageTitle+'</a>';
     var pageValue = pageTitle;
     formattedList.push(
-      {"value":pageValue, "data": {pageUrl, "category": "Product Documents"} }
+      {"value":pageValue, "data": {pageUrl, "category": "Product Documents (top 2)"} }
     );
     // var body = page['highlight']['body'];
   }
@@ -348,7 +348,7 @@ function formatAutocompleteResultsVideo(data)
     // var pageValue = '<a href="'+pageUrl+'">'+pageTitle+'</a>';
     var pageValue = pageTitle;
     formattedList.push(
-      {"value":pageValue, "data": {pageUrl, "category": "Papers / Webinars / Case Studies"} }
+      {"value":pageValue, "data": {pageUrl, "category": "Papers / Webinars / Case Studies (top 2)"} }
     );
     // var body = page['highlight']['body'];
   }
@@ -421,7 +421,8 @@ function getAutocompleteResultsFromDocumentation(term)
     $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
 
     var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Uo-nNU7DVc5j98u4RAMf', {
-      'q': term
+      'q': term,
+      'per_page': 2
     });
     //----------------------//
     request.fail (function (jqXHR, textStatus , errorThrown){
@@ -451,7 +452,8 @@ function getAutocompleteResultsFromVideo(term)
     $.ajaxSetup({ traditional: "true" }); //required else multi parameters go with [] after parm name
 
     var request = $.get('https://api.swiftype.com/api/v1/public/engines/suggest?engine_key=Q9h_KJ8_Yoq1exwq71Pz', {
-      'q': term
+      'q': term,
+      'per_page': 2
     });
     //----------------------//
     request.fail (function (jqXHR, textStatus , errorThrown){
