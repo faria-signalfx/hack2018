@@ -8,7 +8,7 @@ var MAX_RESULTS = 5;
 
 //---------------------------------------------//
 //credit: https://www.w3schools.com/howto/howto_js_tabs.asp
-function showTab(evt, cityName) {
+function showTab(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -25,13 +25,34 @@ function showTab(evt, cityName) {
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+
+    //show the searchResultsSummary for current tab and hide others
+    var arr = tabName.split('-');
+    var match = 'searchResultsSummary-'+arr[1];
+    var elms = $('[id^=searchResultsSummary]');
+    var icount = elms.length;
+    for (var i=0; i<icount; i++)
+    {
+      var elmId = elms[i].id;
+      if (elmId == match)
+      {
+        $('#'+match).show();
+      }
+      else
+      {
+        $('#'+elmId).hide();
+      }
+
+    }
+
+
 }
 //---------------------------------------------//
 function getResults()
 {
-  console.log('getting results for ', $('#autocomplete').val());
+  // console.log('getting results for ', $('#autocomplete').val());
   //empty the global resultsForAllTab
   resultsForAllTab = new Array();
 
@@ -57,9 +78,10 @@ function getDocumentationResults()
   });
   //----------------------//
   request.done (function(data) {
-    console.log('data is ', data);
+    // console.log('data is ', data);
     displayResultsDocumentation(data);
     displayAllTab();
+    getSearchResultsSummary(data,'product');
     $('#searchResultsTab-all').click();
     // $('#searchResultsTab-product').click();//FIXME: adding this line causing JS error
   });
@@ -84,6 +106,7 @@ function getVideoResults()
   request.done (function(data) {
     // console.log('video data is ', data);
     displayResultsVideo(data);
+    getSearchResultsSummary(data,'video');
   });
   //----------------------//
   request.always (function() {});
@@ -106,6 +129,7 @@ function getBlogResults()
   request.done (function(data) {
     // console.log('video data is ', data);
     displayResultsBlog(data);
+    getSearchResultsSummary(data,'blog');
   });
   //----------------------//
   request.always (function() {});
@@ -267,6 +291,24 @@ function displayAllTab()
 
     // console.log(resultsForAllTab[i]);
   }
+
+}
+//---------------------------------------------//
+function getSearchResultsSummary(data,tabName)
+{
+  // $('#searchResultsSummary-'+tabName).show();
+  var info = data['info']['page'];
+  var numberOfResults = Number(info['total_result_count']);
+  var maxResults = Number(info['per_page']);
+  $('#searchTerm-'+tabName).html(info['query']);
+  $('#numberOfResults-'+tabName).html(numberOfResults);
+
+
+  if( numberOfResults >= maxResults)
+  {
+      $('#maxResults-'+tabName).html('Showing max '+maxResults+' results');
+  }
+
 }
 //---------------------------------------------//
 function getAutocompleteResults(term)

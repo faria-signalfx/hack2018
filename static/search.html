@@ -18,14 +18,22 @@
 </div> -->
 
   <!-- Tab links -->
-  <div class="tab" style='display:none;width:460px;position:relative;left:50%;margin-left:-230px;'>
+  <div class="tab" style='display:none;width:460px;position:relative;left:55%;margin-left:-230px;'>
     <button class="tablinks" onclick="showTab(event, 'searchResults-all')" id='searchResultsTab-all'>All</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-product')" id='searchResultsTab-product'>Product Docs</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-video')" id='searchResultsTab-video'>Papers / Webinars / Case Studies</button>
     <button class="tablinks" onclick="showTab(event, 'searchResults-blog')" id='searchResultsTab-blog'>Blog Posts</button>
 
   </div>
-
+  <div id='searchResultsSummary-product' style='display:none;font-family: "Open Sans", sans-serif;color:#aaaaaa;font-size: 12px;width:460px;position:relative;left:55%;margin-left:-230px;'>
+    Searched for "<i><elm id='searchTerm-product'></elm></i>". Got <elm id='numberOfResults-product'></elm> results. <elm id='maxResults-product'></elm>
+  </div>
+  <div id='searchResultsSummary-video' style='display:none;font-family: "Open Sans", sans-serif;color:#aaaaaa;font-size: 12px;width:460px;position:relative;left:55%;margin-left:-230px;'>
+    Searched for "<i><elm id='searchTerm-video'></elm></i>". Got <elm id='numberOfResults-video'></elm> results. <elm id='maxResults-video'></elm>
+  </div>
+  <div id='searchResultsSummary-blog' style='display:none;font-family: "Open Sans", sans-serif;color:#aaaaaa;font-size: 12px;width:460px;position:relative;left:55%;margin-left:-230px;'>
+    Searched for "<i><elm id='searchTerm-blog'></elm></i>". Got <elm id='numberOfResults-blog'></elm> results. <elm id='maxResults-blog'></elm>
+  </div>
 
 
 
